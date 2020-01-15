@@ -1,4 +1,4 @@
-# Traceback publisher
+# Traceback publisher [![Build Status](https://travis-ci.com/RemiRigal/traceback-publisher.svg?branch=master)](https://travis-ci.com/RemiRigal/traceback-publisher)
 
 Simple ROS library that allows any python-based node to publish errors into the `/rosout` topic. It can work both on main and child threads.
 
