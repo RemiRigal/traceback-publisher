@@ -4,7 +4,10 @@
 import sys
 import rospy
 import traceback
-import StringIO
+try:
+    from StringIO import StringIO  # Python 2
+except ImportError:
+    from io import StringIO  # Python 3
 from std_msgs.msg import String
 
 
@@ -19,7 +22,7 @@ class TracebackPublisher(object):
             self.publisher = rospy.Publisher(publishTopic, String, queue_size=20)
 
     def exceptHook(self, exctype, value, tb):
-        tracebackOutput = StringIO.StringIO()
+        tracebackOutput = StringIO()
         traceback.print_tb(tb, None, tracebackOutput)
         rospy.logerr("Error in main thread:\n{}".format(tracebackOutput.getvalue()))
         if self.publisher is not None:
