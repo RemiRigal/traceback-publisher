@@ -24,6 +24,6 @@ class TracebackPublisher(object):
     def exceptHook(self, exctype, value, tb):
         tracebackOutput = StringIO()
         traceback.print_tb(tb, None, tracebackOutput)
-        rospy.logerr("Error in main thread:\n{}".format(tracebackOutput.getvalue()))
+        rospy.logerr("Error in main thread:\n{}{}: {}".format(tracebackOutput.getvalue(), exctype.__name__, value))
         if self.publisher is not None:
             self.publisher.publish(String(tracebackOutput.getvalue()))
